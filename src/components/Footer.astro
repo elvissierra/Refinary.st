@@ -1,0 +1,24 @@
+---
+const year = new Date().getFullYear();
+const socials = [
+	{ label: 'Refinery.st (CAD)', href: 'https://www.instagram.com/refinery.st/' },
+	{ label: '@_lvlszn_ (personal)', href: 'https://www.instagram.com/_lvlszn_/' },
+	{ label: 'GitHub', href: 'https://github.com/elvissierra' },
+	{ label: 'Software portfolio', href: 'https://elvissierra.github.io' },
+];
+---
+
+<footer class="px-6 py-12 border-t border-zinc-800">
+	<div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+		<p class="text-sm text-zinc-500">&copy; {year} Refinery.st — Elvis Sierra</p>
+		<ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400">
+			{socials.map((social) => (
+				<li>
+					<a href={social.href} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+						{social.label}
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</footer>
