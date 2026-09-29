@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 // Deploys to GitHub Pages as a project site, so `base` must match the repo name.
 export default defineConfig({
   site: 'https://elvissierra.github.io',
-  base: '/Refinary.st',
+  base: '/Refinary.st/',
   vite: {
     plugins: [tailwindcss()]
   }
