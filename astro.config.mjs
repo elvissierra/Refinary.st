@@ -6,7 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 // Deploys to the configured custom domain. Keep the site at the URL root.
 export default defineConfig({
-  site: 'https://refinary.st.io',
+  site: 'https://elvissierra.github.io',
+  base: '/Refinary.st',
   vite: {
     plugins: [tailwindcss()]
   }
