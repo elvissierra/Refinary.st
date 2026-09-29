@@ -37,5 +37,5 @@ Astro + Tailwind site, deployed to GitHub Pages via GitHub Actions.
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
-and publishes it to GitHub Pages. Enable Pages in the repo settings with source
-set to "GitHub Actions" for this to work.
+and publishes it to `https://elvissierra.github.io/Refinary.st/`. Enable Pages
+in the repo settings with source set to "GitHub Actions" for this to work.
