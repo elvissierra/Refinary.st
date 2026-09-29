@@ -20,10 +20,9 @@ Astro + Tailwind site, deployed to GitHub Pages via GitHub Actions.
    `FORMSPREE_ENDPOINT` with your real endpoint URL.
 2. **Product/work photos**: replace the placeholder images referenced in
    `Products.astro` and `Work.astro` with real product and build photos.
-3. **Custom domain (optional)**: if you buy a domain for this, add a `CNAME`
-   file to `public/` with the domain, remove `base` from `astro.config.mjs`,
-   and set `site` to `https://your-domain`. Then update DNS to point at GitHub
-   Pages.
+3. **Custom domain**: this site is configured for `https://refinary.st.io/`.
+   The `public/CNAME` file keeps the domain attached to GitHub Pages. Its DNS
+   record must be a CNAME pointing to `elvissierra.github.io`.
 
 ## Commands
 
@@ -37,5 +36,5 @@ Astro + Tailwind site, deployed to GitHub Pages via GitHub Actions.
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
-and publishes it to `https://elvissierra.github.io/Refinary.st/`. Enable Pages
+and publishes it to `https://refinary.st.io/`. Enable Pages
 in the repo settings with source set to "GitHub Actions" for this to work.
