@@ -8,6 +8,7 @@ import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 // Deploys to Cloudflare Workers (static assets + server routes). Site lives at the URL root.
 export default defineConfig({
+  site: 'https://refinery-st.app',
 
   vite: {
     plugins: [tailwindcss()]

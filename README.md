@@ -1,7 +1,8 @@
 # Refinery.st
 
 CAD, 3D printing, and product design services site for Elvis Sierra. Single-page
-Astro + Tailwind site, deployed to GitHub Pages via GitHub Actions.
+Astro + Tailwind site, deployed to Cloudflare Workers (static assets plus server
+routes) through Workers Builds.
 
 ## Structure
 
@@ -20,9 +21,8 @@ Astro + Tailwind site, deployed to GitHub Pages via GitHub Actions.
    `FORMSPREE_ENDPOINT` with your real endpoint URL.
 2. **Product/work photos**: replace the placeholder images referenced in
    `Products.astro` and `Work.astro` with real product and build photos.
-3. **Custom domain**: this site is configured for `https://refinary.st.io/`.
-   The `public/CNAME` file keeps the domain attached to GitHub Pages. Its DNS
-   record must be a CNAME pointing to `elvissierra.github.io`.
+3. **Custom domain** (optional): the site is served from the free `workers.dev` URL.
+   To use your own domain, add it under the Worker's Domains tab in Cloudflare.
 
 ## Commands
 
@@ -35,6 +35,7 @@ Astro + Tailwind site, deployed to GitHub Pages via GitHub Actions.
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the site
-and publishes it to `https://refinary.st.io/`. Enable Pages
-in the repo settings with source set to "GitHub Actions" for this to work.
+The Worker is named `refinery-st` (see `wrangler.jsonc`). Pushing to `main`
+triggers a Cloudflare Workers Build that runs `npm run build` and
+`npx wrangler deploy`. Enable the `workers.dev` route on the Worker's Domains tab
+to make the site reachable.
