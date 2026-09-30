@@ -1,0 +1,44 @@
+---
+const reasons = [
+	{
+		title: 'Engineered, not just modeled',
+		description:
+			'Every model is parametric and built for how it will be made. Changes are quick and consistent, and the part that prints is the part that was designed.',
+	},
+	{
+		title: 'Prototype before you commit',
+		description:
+			'Physical test parts confirm fit, strength, and function before money goes into production runs or tooling.',
+	},
+	{
+		title: 'One partner, design to launch',
+		description:
+			'CAD, prototyping, production, and the website or app a product needs, all from one studio and one point of contact.',
+	},
+	{
+		title: 'Clear scope and communication',
+		description:
+			'A written quote with defined deliverables before work begins, and progress updates at every stage.',
+	},
+];
+---
+
+<section id="why" class="border-t border-zinc-800 px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+	<div class="max-w-6xl mx-auto grid grid-cols-1 gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
+		<div>
+			<h2 class="font-display text-3xl font-semibold tracking-tight">Why Refinery.st</h2>
+			<p class="mt-3 text-zinc-400">
+				Software engineering discipline applied to physical products. The result is designs that
+				hold up in your hands, not just on screen.
+			</p>
+		</div>
+		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+			{reasons.map((reason) => (
+				<div class="border-l-2 border-orange-500 pl-5">
+					<h3 class="font-display font-semibold">{reason.title}</h3>
+					<p class="mt-2 text-sm text-zinc-400 leading-relaxed">{reason.description}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

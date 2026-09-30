@@ -1,0 +1,28 @@
+---
+// Only add testimonials in the client's own words, approved by them, with permission to show their name.
+// The section stays hidden until at least one entry exists.
+const testimonials: {
+	quote: string;
+	name: string;
+	context: string; // e.g. "Small business owner" or "Custom pet tag"
+}[] = [];
+---
+
+{testimonials.length > 0 && (
+	<section id="testimonials" class="border-t border-zinc-800 px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+		<div class="max-w-6xl mx-auto">
+			<h2 class="font-display text-3xl font-semibold tracking-tight">What clients say</h2>
+			<div class="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+				{testimonials.map((t) => (
+					<figure class="flex flex-col rounded-2xl border border-zinc-800 p-6">
+						<blockquote class="flex-1 text-sm text-zinc-300 leading-relaxed">“{t.quote}”</blockquote>
+						<figcaption class="mt-5 border-t border-zinc-800 pt-4">
+							<p class="font-display text-sm font-semibold">{t.name}</p>
+							<p class="text-xs text-zinc-500">{t.context}</p>
+						</figcaption>
+					</figure>
+				))}
+			</div>
+		</div>
+	</section>
+)}

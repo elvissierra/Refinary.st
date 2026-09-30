@@ -1,24 +1,61 @@
 ---
 const year = new Date().getFullYear();
+const services = ['CAD Design & Engineering', '3D Printing & Prototyping', 'Product Development', 'Apps, Sites & Tools'];
+const company = [
+	{ label: 'Products', href: '#products' },
+	{ label: 'How it works', href: '#process' },
+	{ label: 'About', href: '#about' },
+	{ label: 'FAQ', href: '#faq' },
+	{ label: 'Request a quote', href: '#contact' },
+];
 const socials = [
-	{ label: 'Refinery.st (CAD)', href: 'https://www.instagram.com/refinery.st/' },
-	{ label: '@_lvlszn_ (personal)', href: 'https://www.instagram.com/_lvlszn_/' },
+	{ label: 'Instagram @refinery.st', href: 'https://www.instagram.com/refinery.st/' },
 	{ label: 'GitHub', href: 'https://github.com/elvissierra' },
 	{ label: 'Software portfolio', href: 'https://elvissierra.github.io' },
 ];
 ---
 
-<footer class="px-6 py-12 border-t border-zinc-800">
-	<div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-		<p class="text-sm text-zinc-500">&copy; {year} Refinery.st — Elvis Sierra</p>
-		<ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-400">
-			{socials.map((social) => (
-				<li>
-					<a href={social.href} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
-						{social.label}
-					</a>
-				</li>
-			))}
-		</ul>
+<footer class="border-t border-zinc-800 px-4 py-12 sm:px-6 sm:py-16">
+	<div class="max-w-6xl mx-auto grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+		<div>
+			<a href="#" class="font-display text-lg font-semibold tracking-tight">
+				Refinery<span class="text-orange-500">.st</span>
+			</a>
+			<p class="mt-3 text-sm text-zinc-400 leading-relaxed">
+				Product design, CAD, and 3D printing, from idea to finished part.
+			</p>
+		</div>
+		<div>
+			<h2 class="text-sm font-medium text-zinc-200">Services</h2>
+			<ul class="mt-4 space-y-2 text-sm text-zinc-400">
+				{services.map((service) => (
+					<li><a href="#services" class="hover:text-white transition-colors">{service}</a></li>
+				))}
+			</ul>
+		</div>
+		<div>
+			<h2 class="text-sm font-medium text-zinc-200">Company</h2>
+			<ul class="mt-4 space-y-2 text-sm text-zinc-400">
+				{company.map((link) => (
+					<li><a href={link.href} class="hover:text-white transition-colors">{link.label}</a></li>
+				))}
+			</ul>
+		</div>
+		<div>
+			<h2 class="text-sm font-medium text-zinc-200">Connect</h2>
+			<ul class="mt-4 space-y-2 text-sm text-zinc-400">
+				<li><a href="mailto:refinery.st@gmail.com" class="hover:text-white transition-colors">refinery.st@gmail.com</a></li>
+				{socials.map((social) => (
+					<li>
+						<a href={social.href} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+							{social.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
 	</div>
+	<p class="max-w-6xl mx-auto mt-12 border-t border-zinc-800 pt-6 text-sm text-zinc-500">
+		&copy; {year} Refinery.st. All rights reserved.
+	</p>
 </footer>

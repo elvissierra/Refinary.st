@@ -16,6 +16,8 @@ const PROJECT_TYPES = new Set([
 	'Something else',
 ]);
 
+const TIMELINES = new Set(['Flexible', 'Within a month', 'Within two weeks', 'Urgent']);
+
 const json = (body: Record<string, unknown>, status = 200) =>
 	new Response(JSON.stringify(body), {
 		status,
@@ -45,6 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
 	const name = String(form.get('name') ?? '').trim();
 	const email = String(form.get('email') ?? '').trim();
 	const projectType = String(form.get('project-type') ?? '').trim();
+	const timeline = String(form.get('timeline') ?? '').trim();
 	const message = String(form.get('message') ?? '').trim();
 	const token = String(form.get('cf-turnstile-response') ?? '');
 
@@ -52,6 +55,7 @@ export const POST: APIRoute = async ({ request }) => {
 	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 200)
 		return json({ error: 'Please enter a valid email.' }, 400);
 	if (!PROJECT_TYPES.has(projectType)) return json({ error: 'Please choose a project type.' }, 400);
+	if (!TIMELINES.has(timeline)) return json({ error: 'Please choose a timeline.' }, 400);
 	if (message.length < 10 || message.length > 5000)
 		return json({ error: 'Please describe your project (10–5000 characters).' }, 400);
 	if (!token) return json({ error: 'Please complete the verification.' }, 400);
@@ -91,12 +95,13 @@ export const POST: APIRoute = async ({ request }) => {
 			html: `<p><b>Name:</b> ${escapeHtml(name)}</p>
 <p><b>Email:</b> ${escapeHtml(email)}</p>
 <p><b>Type:</b> ${escapeHtml(projectType)}</p>
+<p><b>Timeline:</b> ${escapeHtml(timeline)}</p>
 <p><b>Details:</b></p><p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
 		}),
 	});
 	if (!send.ok) {
 		console.error('Resend failed', send.status, await send.text());
-		return json({ error: 'Could not send your inquiry. Please email me directly.' }, 502);
+		return json({ error: 'Could not send your inquiry. Please email us directly.' }, 502);
 	}
 	return json({ ok: true });
 };

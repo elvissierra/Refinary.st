@@ -1,0 +1,42 @@
+---
+const steps = [
+	{
+		title: 'Consult',
+		description:
+			'Share your idea, sketches, photos, or measurements. We define what the part or product needs to do and the constraints it has to meet.',
+	},
+	{
+		title: 'Quote',
+		description:
+			'You receive a written quote covering scope, deliverables, and timeline before any work begins.',
+	},
+	{
+		title: 'Design & prototype',
+		description:
+			'We model the design in CAD and produce physical prototypes, revising until fit and function are right.',
+	},
+	{
+		title: 'Deliver',
+		description:
+			'Receive finished parts, a small production run, or manufacturing-ready files for your own supplier.',
+	},
+];
+---
+
+<section id="process" class="border-t border-zinc-800 bg-zinc-900/30 px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+	<div class="max-w-6xl mx-auto">
+		<h2 class="font-display text-3xl font-semibold tracking-tight">How it works</h2>
+		<p class="mt-3 text-zinc-400 max-w-xl">
+			A straightforward process from first conversation to finished product.
+		</p>
+		<ol class="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+			{steps.map((step, i) => (
+				<li class="rounded-2xl border border-zinc-800 bg-zinc-950 p-6">
+					<span class="font-display text-sm text-orange-500">0{i + 1}</span>
+					<h3 class="font-display mt-2 text-lg font-semibold">{step.title}</h3>
+					<p class="mt-2 text-sm text-zinc-400 leading-relaxed">{step.description}</p>
+				</li>
+			))}
+		</ol>
+	</div>
+</section>

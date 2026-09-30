@@ -1,0 +1,41 @@
+---
+const clients = [
+	{
+		title: 'Inventors & startups',
+		description:
+			'Turn an idea into a working prototype and a pitch-ready model before committing to tooling or inventory.',
+	},
+	{
+		title: 'Small businesses & product brands',
+		description:
+			'New product development, custom fixtures and displays, and small-batch runs without minimum order quantities.',
+	},
+	{
+		title: 'Custom & replacement parts',
+		description:
+			'Brackets, mounts, enclosures, and hard-to-find parts designed from measurements or an existing sample.',
+	},
+	{
+		title: 'Personalized goods',
+		description:
+			'Custom pet products, gifts, and name-engraved pieces made to order for individuals and retailers.',
+	},
+];
+---
+
+<section id="industries" class="border-t border-zinc-800 bg-zinc-900/30 px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+	<div class="max-w-6xl mx-auto">
+		<h2 class="font-display text-3xl font-semibold tracking-tight">Who we work with</h2>
+		<p class="mt-3 text-zinc-400 max-w-xl">
+			Projects range from a single custom part to a full product line.
+		</p>
+		<div class="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+			{clients.map((client) => (
+				<div class="rounded-2xl border border-zinc-800 bg-zinc-950 p-6">
+					<h3 class="font-display font-semibold">{client.title}</h3>
+					<p class="mt-2 text-sm text-zinc-400 leading-relaxed">{client.description}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>

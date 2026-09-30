@@ -1,0 +1,45 @@
+---
+const faqs = [
+	{
+		q: 'What do I need to get started?',
+		a: 'A description of what you need is enough. Sketches, photos, reference products, or measurements help, but rough is fine. Refining the idea is part of the work.',
+	},
+	{
+		q: 'How is pricing determined?',
+		a: 'Each project is quoted individually based on design complexity, the number of prototype rounds, materials, and quantity. You receive a written quote before any work begins.',
+	},
+	{
+		q: 'Who owns the design?',
+		a: 'Custom designs created for your project belong to you once the project is paid in full, including the CAD files.',
+	},
+	{
+		q: 'Will you sign an NDA?',
+		a: 'Yes. We are happy to sign a non-disclosure agreement before you share the details of your idea.',
+	},
+	{
+		q: 'Can you produce parts in quantity?',
+		a: 'One-off parts and small batches are produced in-house. For larger runs, we design for injection molding or other processes and deliver manufacturing-ready files.',
+	},
+	{
+		q: 'Do you work with clients remotely?',
+		a: 'Yes. Consultations, design reviews, and approvals happen over email or video call, and finished parts ship to you.',
+	},
+];
+---
+
+<section id="faq" class="border-t border-zinc-800 bg-zinc-900/30 px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+	<div class="max-w-3xl mx-auto">
+		<h2 class="font-display text-3xl font-semibold tracking-tight text-center">Frequently asked questions</h2>
+		<div class="mt-8 divide-y divide-zinc-800 border-y border-zinc-800 sm:mt-12">
+			{faqs.map((faq) => (
+				<details class="group py-5">
+					<summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-zinc-100">
+						{faq.q}
+						<span class="text-orange-500 transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+					</summary>
+					<p class="mt-3 text-sm text-zinc-400 leading-relaxed">{faq.a}</p>
+				</details>
+			))}
+		</div>
+	</div>
+</section>

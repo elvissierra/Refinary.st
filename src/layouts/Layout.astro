@@ -7,9 +7,48 @@ interface Props {
 }
 
 const {
-	title = 'Refinery.st — CAD, 3D Printing & Product Design',
-	description = 'Refinery.st is a design-and-build studio for CAD modeling, 3D printing, product development, and custom apps/sites/tools. Based product ideas, functional prototypes, and finished parts.',
+	title = 'Refinery.st | Product Design, CAD & 3D Printing Studio',
+	description = 'Refinery.st is a product design studio offering parametric CAD, 3D printed prototypes, small-batch production, and product websites and tools. Request a quote for your project.',
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const sameAs = [
+	'https://www.instagram.com/refinery.st/',
+	'https://github.com/elvissierra',
+	'https://elvissierra.github.io',
+];
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Person',
+			'@id': `${Astro.site}#elvis`,
+			name: 'Elvis Sierra',
+			jobTitle: 'Founder, Refinery.st',
+			url: Astro.site?.toString(),
+			sameAs,
+			knowsAbout: [
+				'Parametric CAD',
+				'Fusion 360',
+				'FDM 3D printing',
+				'Product development',
+				'Python',
+				'Software engineering',
+			],
+		},
+		{
+			'@type': 'ProfessionalService',
+			'@id': `${Astro.site}#studio`,
+			name: 'Refinery.st',
+			url: Astro.site?.toString(),
+			description,
+			founder: { '@id': `${Astro.site}#elvis` },
+			email: 'refinery.st@gmail.com',
+			sameAs: [sameAs[0]],
+			serviceType: ['CAD design', '3D printing', 'Product development', 'App, site, and tool building'],
+		},
+	],
+};
 ---
 
 <!doctype html>
@@ -23,6 +62,11 @@ const {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:site_name" content="Refinery.st" />
+		<meta name="author" content="Elvis Sierra" />
+		<link rel="canonical" href={canonical} />
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
