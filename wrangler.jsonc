@@ -8,6 +8,10 @@
 		"directory": "./dist",
 		"binding": "ASSETS"
 	},
+	"vars": {
+		"CONTACT_TO": "elvissierra3@gmail.com",
+		"CONTACT_FROM": "Refinery.st <onboarding@resend.dev>"
+	},
 	"observability": {
 		"enabled": true
 	}
