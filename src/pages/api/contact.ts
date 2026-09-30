@@ -7,6 +7,7 @@ const ALLOWED_ORIGINS = new Set([
 	'https://refinery-st.app',
 	'https://www.refinery-st.app',
 ]);
+const ALLOWED_HOSTS = new Set(['refinery-st.app', 'www.refinery-st.app']);
 const PROJECT_TYPES = new Set([
 	'CAD design',
 	'3D printing',
@@ -63,8 +64,9 @@ export const POST: APIRoute = async ({ request }) => {
 			remoteip: request.headers.get('CF-Connecting-IP') ?? '',
 		}),
 	});
-	const verdict = (await verify.json()) as { success: boolean };
-	if (!verdict.success) return json({ error: 'Verification failed. Please try again.' }, 400);
+	const verdict = (await verify.json()) as { success: boolean; action?: string; hostname?: string };
+	const hostOk = import.meta.env.DEV || ALLOWED_HOSTS.has(verdict.hostname ?? '') || (verdict.hostname ?? '').endsWith('.workers.dev');
+	if (!verdict.success || verdict.action !== 'contact' || !hostOk) return json({ error: 'Verification failed. Please try again.' }, 400);
 
 	const send = await fetch('https://api.resend.com/emails', {
 		method: 'POST',
