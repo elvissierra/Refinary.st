@@ -64,9 +64,18 @@ export const POST: APIRoute = async ({ request }) => {
 			remoteip: request.headers.get('CF-Connecting-IP') ?? '',
 		}),
 	});
-	const verdict = (await verify.json()) as { success: boolean; action?: string; hostname?: string };
+	const verdict = (await verify.json()) as { success: boolean; action?: string; hostname?: string; 'error-codes'?: string[] };
 	const hostOk = import.meta.env.DEV || ALLOWED_HOSTS.has(verdict.hostname ?? '') || (verdict.hostname ?? '').endsWith('.workers.dev');
-	if (!verdict.success || verdict.action !== 'contact' || !hostOk) return json({ error: 'Verification failed. Please try again.' }, 400);
+	if (!verdict.success || verdict.action !== 'contact' || !hostOk) {
+		console.error('Turnstile rejected', {
+			success: verdict.success,
+			codes: verdict['error-codes'],
+			action: verdict.action,
+			hostname: verdict.hostname,
+			secretSet: Boolean(env.TURNSTILE_SECRET_KEY),
+		});
+		return json({ error: 'Verification failed. Please try again.' }, 400);
+	}
 
 	const send = await fetch('https://api.resend.com/emails', {
 		method: 'POST',
