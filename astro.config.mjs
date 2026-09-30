@@ -3,12 +3,15 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
-// Deploys to GitHub Pages as a project site, so `base` must match the repo name.
+// Deploys to Cloudflare Workers (static assets + server routes). Site lives at the URL root.
 export default defineConfig({
-  site: 'https://elvissierra.github.io',
-  base: '/Refinary.st/',
+
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  adapter: cloudflare()
 });
