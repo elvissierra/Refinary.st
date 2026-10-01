@@ -9,8 +9,8 @@
 		"binding": "ASSETS"
 	},
 	"vars": {
-		"CONTACT_TO": "elvissierra3@gmail.com",
-		"CONTACT_FROM": "Refinery.st <onboarding@resend.dev>"
+		"CONTACT_TO": "refinery.st@gmail.com",
+		"CONTACT_FROM": "Refinery.st <contact@refinery-st.app>"
 	},
 	"observability": {
 		"enabled": true
