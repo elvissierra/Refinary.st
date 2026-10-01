@@ -75,10 +75,10 @@ const TURNSTILE_SITE_KEY = '0x4AAAAAAFKeDlI-VOaNeu_R';
 					class="w-full rounded-lg bg-zinc-900 border border-zinc-700 px-4 py-2.5 text-sm focus:border-orange-500 focus:outline-none"
 				></textarea>
 			</div>
-			<div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-action="contact" data-theme="dark"></div>
+			<div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-action="contact" data-theme="dark" data-callback="onTurnstileSuccess" data-expired-callback="onTurnstileLost" data-error-callback="onTurnstileLost" data-timeout-callback="onTurnstileLost"></div>
 			<button
 				type="submit"
-				class="w-full rounded-full bg-orange-500 px-6 py-3 text-sm font-medium text-zinc-950 hover:bg-orange-400 transition-colors"
+				class="w-full rounded-full bg-orange-500 px-6 py-3 text-sm font-medium text-zinc-950 hover:bg-orange-400 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
 			>
 				Request a quote
 			</button>
@@ -94,30 +94,41 @@ const TURNSTILE_SITE_KEY = '0x4AAAAAAFKeDlI-VOaNeu_R';
 	</div>
 </section>
 
-<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script>
-	const form = document.getElementById('contact-form') as HTMLFormElement;
-	const status = document.getElementById('form-status')!;
-	const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+<script is:inline>
+	// Defined before the Turnstile script loads so its callbacks resolve by name.
+	(function () {
+		var button = document.querySelector('#contact-form button[type="submit"]');
+		var setReady = function (ready) {
+			button.disabled = !ready;
+		};
+		window.onTurnstileSuccess = function () { setReady(true); };
+		window.onTurnstileLost = function () { setReady(false); };
 
-	form.addEventListener('submit', async (e) => {
-		e.preventDefault();
-		button.disabled = true;
-		status.className = 'text-center text-sm min-h-5 text-zinc-400';
-		status.textContent = 'Sending…';
-		try {
-			const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
-			const data = (await res.json().catch(() => ({}))) as { error?: string };
-			if (!res.ok) throw new Error(data.error || 'Something went wrong.');
-			form.reset();
-			status.className = 'text-center text-sm min-h-5 text-green-400';
-			status.textContent = "Thanks, your inquiry was received. We'll be in touch soon.";
-		} catch (err) {
-			status.className = 'text-center text-sm min-h-5 text-red-400';
-			status.textContent = err instanceof Error ? err.message : 'Something went wrong.';
-		} finally {
-			button.disabled = false;
-			(window as any).turnstile?.reset();
-		}
-	});
+		var form = document.getElementById('contact-form');
+		var status = document.getElementById('form-status');
+		setReady(false);
+
+		form.addEventListener('submit', async function (e) {
+			e.preventDefault();
+			if (button.disabled) return;
+			setReady(false);
+			status.className = 'text-center text-sm min-h-5 text-zinc-400';
+			status.textContent = 'Sending…';
+			try {
+				var res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+				var data = await res.json().catch(function () { return {}; });
+				if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+				form.reset();
+				status.className = 'text-center text-sm min-h-5 text-green-400';
+				status.textContent = "Thanks, your inquiry was received. We'll be in touch soon.";
+			} catch (err) {
+				status.className = 'text-center text-sm min-h-5 text-red-400';
+				status.textContent = err instanceof Error ? err.message : 'Something went wrong.';
+			} finally {
+				// Tokens are single-use: the button stays disabled until a fresh one arrives.
+				if (window.turnstile) window.turnstile.reset();
+			}
+		});
+	})();
 </script>
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
