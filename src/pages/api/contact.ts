@@ -12,7 +12,6 @@ const PROJECT_TYPES = new Set([
 	'CAD design',
 	'3D printing',
 	'Product development',
-	'App / site / tool',
 	'Something else',
 ]);
 

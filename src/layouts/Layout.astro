@@ -8,14 +8,12 @@ interface Props {
 
 const {
 	title = 'Refinery.st | Product Design, CAD & 3D Printing Studio',
-	description = 'Refinery.st is a product design studio offering parametric CAD, 3D printed prototypes, small-batch production, and product websites and tools. Request a quote for your project.',
+	description = 'Refinery.st is a product design studio offering parametric CAD, 3D printed prototypes, and small-batch production. Request a quote for your project.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const sameAs = [
 	'https://www.instagram.com/refinery.st/',
-	'https://github.com/elvissierra',
-	'https://elvissierra.github.io',
 ];
 const structuredData = {
 	'@context': 'https://schema.org',
@@ -32,8 +30,6 @@ const structuredData = {
 				'Fusion 360',
 				'FDM 3D printing',
 				'Product development',
-				'Python',
-				'Software engineering',
 			],
 		},
 		{
@@ -45,7 +41,7 @@ const structuredData = {
 			founder: { '@id': `${Astro.site}#elvis` },
 			email: 'refinery.st@gmail.com',
 			sameAs: [sameAs[0]],
-			serviceType: ['CAD design', '3D printing', 'Product development', 'App, site, and tool building'],
+			serviceType: ['CAD design', '3D printing', 'Product development'],
 		},
 	],
 };
